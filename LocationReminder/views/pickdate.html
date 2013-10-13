@@ -1,0 +1,102 @@
+<div id="pick-location" 
+     data-role="view"  
+     data-title="Pick Date"
+     data-model="app.dateService.viewModel">
+    
+    <div id="example" class="k-content">
+        <div class="demo-section" style="background: black">
+            <div id="special-days">
+                <div id="calendar"></div>
+            </div>
+        </div>
+        
+        <script>
+            $(document).ready(function() {
+                var today = new Date();  
+                $("#calendar").kendoCalendar({
+                    value: today,
+                    month: {
+                        // template for dates in month view
+                        content: '# if ($.inArray(+data.date, data.dates) != -1) { #' +
+                                    '<div>#= data.value #</div>' +
+                                 '# } else { #' +
+                                 '#= data.value #' +
+                                 '# } #'
+                    },
+                    footer: false
+                });
+            });
+            
+            var calendar = $("#calendar").data("kendoCalendar");
+            
+            calendar.bind("change", function() {
+                app.selectedDate = this.value();
+                app.addTaskService.viewModel.onDateSelected(this.value());
+            });
+        </script>
+
+        <style scoped>
+            .demo-section {
+                height: 100%;;
+                width: 100%;  
+            }
+            #special-days {
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                background: black;
+            }
+            #calendar {
+                margin: 0;
+                width: 100%;
+                text-align: center;
+            }
+            #calendar .k-content {
+                height: 320px;
+            }
+            #calendar,
+            #calendar .k-content,
+            #calendar .k-header,
+            #calendar th,
+            #calendar .k-link,
+            #calendar .k-state-hover,
+            #calendar .k-state-selected,
+            #calendar .k-state-focused {
+                background: transparent;
+                border-color: transparent;
+                color: #fff;
+                box-shadow: none;
+            }
+            #calendar .k-content .k-state-hover,
+            #calendar .k-content .k-state-focused {
+                font-size: 14px;
+                font-weight: bold;
+            }
+            #calendar .k-state-selected, #calendar .k-state-selected.k-state-focused {
+                font-size: 24px;
+                font-weight: bold;
+                background-color: #00a1e8;
+                -moz-border-radius: 100px;
+                border-radius: 50%;
+            }
+            #calendar .k-content .k-link {
+                padding: 0;
+                min-height: 40px;
+                line-height: 40px;
+            }
+            #calendar th {
+                padding-top: 20px;
+                color: #8cbabf;
+            }
+            #calendar td.k-other-month .k-link {
+                color: #8cbabf;
+            }
+            #calendar th,
+            #calendar td {
+                text-align: center;
+            }
+        </style>
+    </div>
+    <a id="select-date" data-role="button" href="views/addtask.html" height="60px">Select Date</a>
+</div>

@@ -1,0 +1,61 @@
+body{
+    position: relative    ;
+}
+
+#select-location{
+    position: absolute;
+    bottom: 0;  
+    z-index: 10;
+    height: 25px;
+    margin:7px 65px;
+    width:55%;
+}
+
+#select-date{
+    position: absolute;
+    bottom: -30;
+    height: 20px;
+    height: 25px;
+    margin:7px 65px;
+    width:55%;
+}
+
+#calendar-wrapper{
+    background: black;
+    height: 100%;    
+}
+
+#task-details{
+    font-size:10px;
+}
+
+.details-row{
+    height: 50px;
+    vertical-align: middle;
+}
+
+#pick-location-btn, #pick-date-btn{    
+    margin: 10px;
+    width: 32%;
+    height: 30px;
+}
+
+#pick-location-btn{
+    margin-left: 27px;
+}
+
+#add-task-btn{    
+    margin: 10px;
+    width: 70%;
+    height: 30px;
+    margin-left: 11.5%;
+}
+
+#task-date, #task-location{
+    position:absolute;
+    right:20px;
+    font-weight:normal;
+    font-size: 12px;
+}
+
+

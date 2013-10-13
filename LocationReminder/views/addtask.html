@@ -1,0 +1,46 @@
+<div id="tabstrip-addtask" 
+     data-role="view"  
+     data-title="Add Task" 
+     data-model="app.addTaskService.viewModel">
+
+    <div class="view-content"> 
+        <div>
+            <a id="pick-location-btn" data-role="button" href="views/picklocation.html">Pick Location</a>
+            <a id="pick-date-btn" data-role="button" href="views/pickdate.html">Pick Date</a>
+        </div>
+        
+        <h3>Task Details:</h3>
+        <ul id="task-details" data-role="listview" data-style="inset">
+            <li class="details-row">
+                <label for="task-location">
+                    Location:                    
+                </label>
+                <span class="task-details-value" type="text" id="task-location" data-bind="text: selectedLocaion"></span>
+            </li>
+            <li class="details-row">
+                <label for="task-date">
+                    Date:                    
+                </label>
+                <span class="task-details-value" type="text" id="task-date" data-bind="text: selectedDate"></span>
+            </li>
+            <li class="details-row">
+                <label for="task-range">
+                    Notification range (m):                    
+                </label>
+                <input class="task-details-value" type="number" id="task-range"/>
+            </li>
+            <li class="details-row">
+                Notification only on selected date
+                <input data-role="switch" id="date-alert-switch" checked="checked" data-change="app.addTaskService.viewModel.onSwitchChange"/>                
+            </li>
+            <li>
+                <label for="task-notes">
+                    Notes:                    
+                </label><br/>
+                <textarea class="task-details-value" id="task-notes" rows="3" style="font-size: 15px; width: 100%">
+                </textarea>
+            </li>
+        </ul>
+        <a id="add-task-btn" data-role="button" data-bind="click: onAddTask">Add Task</a>
+    </div>
+</div>

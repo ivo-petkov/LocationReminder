@@ -8,6 +8,7 @@
         _lastMarker: null,
         _isLoading: false,
         address: "",
+        currentPosition:"",
 
         onNavigateHome: function () {
             var that = this,
@@ -15,6 +16,10 @@
 
             that._isLoading = true;
             that.showLoading();
+            
+            google.maps.event.addListener(map, 'click', function(event) {
+                that._putMarker(event.latLng);                
+            });
 
             navigator.geolocation.getCurrentPosition(
                 function (position) {
@@ -83,8 +88,16 @@
             that._lastMarker = new google.maps.Marker({
                 map: map,
                 position: position
-            });
-        }
+            });            
+            
+            app.locationService.viewModel.set("currentPosition",position);                                   
+        },
+        
+        onSelectLocation: function(e)
+        {  
+            app.addTaskService.viewModel.onLocationSelected(this.currentPosition);
+            app.application.navigate("views/addtask.html")
+        },
     });
 
     app.locationService = {
@@ -100,10 +113,11 @@
                     mapTypeControl: false,
                     streetViewControl: false
                 };
-
+          
             map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);            
             geocoder = new google.maps.Geocoder();
             app.locationService.viewModel.onNavigateHome.apply(app.locationService.viewModel, []);
+            
         },
 
         show: function () {
